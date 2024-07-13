@@ -20,6 +20,6 @@
 
 #include "ares_build.h"
 #include "ares_config.h"
-#include "../c-ares/include/ares.h"
+#include "ares.h"
 
 #endif
