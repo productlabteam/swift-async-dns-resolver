@@ -24,11 +24,7 @@ public struct AsyncDNSResolver {
     /// By default, this makes use of the `dnssd` framework on Darwin platforms,
     /// and the `c-ares` C library on others.
     public init() throws {
-        #if canImport(Darwin)
         self.init(DNSSDDNSResolver())
-        #else
-        try self.init(CAresDNSResolver())
-        #endif
     }
 
     /// Initialize an `AsyncDNSResolver` using the given ``DNSResolver``.
@@ -37,15 +33,6 @@ public struct AsyncDNSResolver {
     ///   - dnsResolver: The ``DNSResolver`` to use.
     public init(_ dnsResolver: DNSResolver) {
         self.underlying = dnsResolver
-    }
-
-    /// Initialize an `AsyncDNSResolver` backed by ``CAresDNSResolver``
-    /// created using the given options.
-    ///
-    /// - Parameters:
-    ///   - options: Options to create ``CAresDNSResolver`` with.
-    public init(options: CAresDNSResolver.Options) throws {
-        try self.init(CAresDNSResolver(options: options))
     }
 
     /// See ``DNSResolver/queryA(name:)``.
